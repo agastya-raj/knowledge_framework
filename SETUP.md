@@ -4,7 +4,7 @@ This guide is for AI agents setting up the Knowledge Framework for a user. Follo
 
 ## Step 1: Clone the Repository
 
-Clone to a stable, accessible location. Recommended: `~/knowledge_framework` or within the user's workspace.
+Clone to a stable, accessible location:
 
 ```bash
 git clone https://github.com/agastya-raj/knowledge_framework ~/knowledge_framework
@@ -24,122 +24,93 @@ python ~/knowledge_framework/scripts/rebuild_index.py
 
 If the user wants to keep the examples as reference, skip this step.
 
-## Step 3: Integrate with Agent Configuration
+## Step 3: Set Up Your Agent
 
-The knowledge base needs a small pointer in the agent's configuration so it knows the knowledge base exists. This is the **only setup step that's agent-specific**.
+Detailed setup guides for each agent are in the `agents/` directory:
 
-### Claude Code
+| Agent | Guide | Features |
+|-------|-------|----------|
+| **Claude Code** | [agents/claude-code/setup.md](agents/claude-code/setup.md) | CLAUDE.md auto-integration + `/capture`, `/reflect`, `/curate` slash commands |
+| **Codex (OpenAI)** | [agents/codex/setup.md](agents/codex/setup.md) | AGENTS.md integration + equivalent prompt workflows |
+| **OpenCode** | [agents/opencode/setup.md](agents/opencode/setup.md) | instructions.md integration + equivalent prompt workflows |
 
-Add the following to the user's `~/.claude/CLAUDE.md` (or the project's `CLAUDE.md`):
+### Quick Setup (any agent)
 
-```markdown
-## Knowledge Base
-Shared knowledge base at ~/knowledge_framework (GitHub: knowledge_framework).
-- **Before non-trivial tasks:** scan `index.md` for relevant entries, read full entries if matched
-- **After significant work:** drop a draft in `_inbox/` using the draft template
-- **On request:** curate drafts into polished entries per CLAUDE.md instructions in that repo
-```
-
-### Codex (OpenAI)
-
-Add to the project's `AGENTS.md` or task instructions:
+At minimum, add this to your agent's instruction file:
 
 ```markdown
 ## Knowledge Base
-Before starting non-trivial tasks, check ~/knowledge_framework/index.md for relevant past knowledge.
-After completing significant work, write a knowledge draft to ~/knowledge_framework/_inbox/ following the template in ~/knowledge_framework/templates/draft.md.
+A shared knowledge base exists at ~/knowledge_framework.
+- Before non-trivial tasks: read index.md, find relevant entries, read them
+- After significant work: write a draft to _inbox/YYYYMMDD_slug.md
 ```
 
-### OpenCode / Other Agents
+### Claude Code Slash Commands
 
-Add to the agent's system prompt or project instructions (same content as the Codex section above). The key information is:
-- **Path:** `~/knowledge_framework`
-- **Search:** Read `index.md`, then read full entries from `entries/`
-- **Capture:** Write drafts to `_inbox/` using `templates/draft.md`
+Claude Code supports three slash commands. Install them:
 
-### Cursor
-
-Add the knowledge_framework directory as a workspace folder. Add to `.cursorrules`:
-
+```bash
+mkdir -p ~/.claude/commands
+cp ~/knowledge_framework/agents/claude-code/commands/*.md ~/.claude/commands/
 ```
-When starting non-trivial tasks, check @knowledge_framework/index.md for relevant knowledge entries.
-After significant work, create a draft in @knowledge_framework/_inbox/.
-```
+
+| Command | What it does |
+|---------|-------------|
+| `/capture` | Quick knowledge capture — drafts what was learned this session into `_inbox/` |
+| `/reflect` | Deep introspection — thorough analysis with code blocks, configs, architecture. Use `/reflect --full` for entire project. |
+| `/curate` | Process inbox — polish drafts into entries, rebuild index, commit and push |
+
+**Update paths:** If your knowledge base is not at `~/ad_hoc/knowledge_framework`, update the paths in the copied command files.
 
 ## Step 4: Customize for the User
 
 ### Update domains (if needed)
 
 The default valid domains in `scripts/validate.py` are:
-- `software-engineering`
-- `optical-networking`
-- `ml-ai`
-- `devops`
-- `research-methods`
-- `general`
+- `software-engineering`, `optical-networking`, `ml-ai`, `devops`, `research-methods`, `general`
 
-If the user works in different domains, update the `VALID_DOMAINS` set in `scripts/validate.py` and document the new domains in `CLAUDE.md`.
+If the user works in different domains, update the `VALID_DOMAINS` set in `scripts/validate.py` and document them in `CLAUDE.md`.
 
 ### Update entry categories (if needed)
 
-The default categories in `entries/` are: `patterns`, `decisions`, `domain`, `integrations`, `debugging`, `tools`, `research`. To add a new category:
+Default categories: `patterns`, `decisions`, `domain`, `integrations`, `debugging`, `tools`, `research`.
 
-1. Create the directory: `mkdir entries/new_category`
-2. Add a `.gitkeep`: `touch entries/new_category/.gitkeep`
-3. Add the type mapping in `scripts/curate.py` (the `TYPE_TO_CATEGORY` dict)
-4. Add the type to `VALID_TYPES` in `scripts/validate.py`
-5. Document it in `CLAUDE.md`
+To add a new category:
+1. `mkdir entries/new_category && touch entries/new_category/.gitkeep`
+2. Add the type mapping in `scripts/curate.py` (`TYPE_TO_CATEGORY` dict)
+3. Add the type to `VALID_TYPES` in `scripts/validate.py`
+4. Document it in `CLAUDE.md`
 
-## Step 5: Create First Knowledge Entry
-
-To verify the setup works, create a test entry:
-
-1. Write a draft to `_inbox/`:
-   ```bash
-   cp ~/knowledge_framework/templates/draft.md ~/knowledge_framework/_inbox/20260220_test_setup.md
-   ```
-
-2. Edit the draft with real content (title, tags, what was learned).
-
-3. Run the curator:
-   ```bash
-   python ~/knowledge_framework/scripts/curate.py
-   ```
-
-4. Verify the entry was promoted to `entries/` and appears in `index.md`.
-
-5. If it works, delete the test entry or keep it as your first real entry.
-
-## Step 6: Set Up Git Push (Optional)
-
-If the user wants changes synced to GitHub:
+## Step 5: Verify
 
 ```bash
 cd ~/knowledge_framework
-git remote add origin <github-url>
+python scripts/validate.py --all    # Should pass with 0 failures
+python scripts/rebuild_index.py     # Should complete without errors
+```
+
+Then start a new agent session and ask: "What's in my knowledge base?" — the agent should find and summarize `index.md`.
+
+## Step 6: Git Remote (Optional)
+
+```bash
+cd ~/knowledge_framework
+git remote add origin <your-github-url>
 git push -u origin main
 ```
 
-The `curate.py --commit` flag handles commit and push automatically during curation.
-
-## Verification
-
-After setup, verify:
-- [ ] `python scripts/validate.py --all` passes with 0 failures
-- [ ] `python scripts/rebuild_index.py` completes without errors
-- [ ] The agent configuration file (CLAUDE.md / AGENTS.md) contains the knowledge base pointer
-- [ ] Starting a new session with the agent, it can find and read `index.md`
+The `curate.py --commit` flag handles commit+push during curation.
 
 ## Troubleshooting
 
-**Agent doesn't auto-search the knowledge base:**
-The agent config pointer might not be loaded. Verify the path in CLAUDE.md/AGENTS.md matches the actual repo location.
+**Agent doesn't search the knowledge base:**
+Verify the path in your agent's config file matches the actual repo location.
 
-**`curate.py` fails with import errors:**
-Run from the scripts directory or ensure Python can find sibling modules:
-```bash
-cd ~/knowledge_framework && python scripts/curate.py
-```
+**`curate.py` import errors:**
+Run from the repo root: `cd ~/knowledge_framework && python scripts/curate.py`
 
-**Entries fail validation unexpectedly:**
-Check that the frontmatter `type` and `domain` values match the valid options. Run `python scripts/validate.py <file>` for specific error messages.
+**Validation failures:**
+Check that frontmatter `type` and `domain` values are in the valid lists. Run `python scripts/validate.py <file>` for specific errors.
+
+**Slash commands not showing in Claude Code:**
+Verify files exist at `~/.claude/commands/capture.md`, `reflect.md`, `curate.md`. Restart Claude Code.

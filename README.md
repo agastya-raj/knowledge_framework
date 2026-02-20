@@ -64,6 +64,10 @@ knowledge_framework/
 │   └── rebuild_index.py  # Regenerate index.md and tags.md
 ├── index.md              # Auto-generated searchable index
 ├── tags.md               # Auto-generated tag index
+├── agents/               # Per-agent setup guides and configs
+│   ├── claude-code/      # CLAUDE.md pointer + /capture, /reflect, /curate commands
+│   ├── codex/            # AGENTS.md integration + equivalent prompts
+│   └── opencode/         # instructions.md integration + equivalent prompts
 ├── CLAUDE.md             # Agent instructions (search, capture, curate)
 ├── SETUP.md              # Setup guide for agents
 └── README.md             # This file
