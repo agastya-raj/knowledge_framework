@@ -1,13 +1,20 @@
 # Knowledge Framework Index
 
-_Auto-generated on 2026-02-20. Do not edit manually._
+_Auto-generated on 2026-02-24. Do not edit manually._
 
-**5 entries**
+**12 entries**
 
 | Entry | Type | Tags | Domain | Confidence | Summary |
 |-------|------|------|--------|------------|---------|
 | [EDFA Gain Spectrum Modeling with ML](entries/domain/edfa_gain_modeling.md) | domain | edfa, gain-spectrum, noise-figure, ml, transfer-learning, optical-amplifier, jocn | optical-networking | high | EDFAs (Erbium-Doped Fiber Amplifiers) are the backbone of long-haul optical n... |
 | [Digital Twin Architecture for Optical Networks](entries/patterns/digital_twin_optical_network.md) | pattern | digital-twin, optical-network, dlm, digital-link-model, ila, monitoring, testbed | optical-networking | high | Operating optical networks requires continuous monitoring and prediction of s... |
+| [CI/CD Pipeline for LaTeX Thesis with AI-Powered Academic Review](entries/patterns/latex_thesis_cicd_ai_review.md) | pattern | latex, thesis, ci-cd, github-actions, overleaf, ai-review, academic-writing, claude-code-action | research-methods | medium | PhD thesis writing in LaTeX suffers from two quality gaps that slow down the ... |
 | [Multi-Agent Research Pipeline for Large Dataset Analysis](entries/patterns/multi_agent_research_pipeline.md) | pattern | multi-agent, swarm, research, large-dataset, iterative-analysis, exploration-exploitation | research-methods | medium | You have a large dataset (hundreds of GBs) that needs exploratory analysis — ... |
+| [OpenCode SDK Integration and Multi-Backend AI Agent Abstraction](entries/integrations/opencode_sdk_backend_abstraction.md) | integration | opencode-sdk, codex-sdk, backend-abstraction, sdk-migration, ai-agents, structured-output | software-engineering | medium | You need to integrate an AI agent backend into a multi-service application --... |
 | [Agent-Agnostic Knowledge Management for AI-Assisted Development](entries/patterns/agent_agnostic_knowledge_management.md) | pattern | knowledge-management, multi-agent, workflow, knowledge-base, agentic, cross-tool | software-engineering | medium | When working across multiple AI coding agents (Claude Code, Codex, OpenCode, ... |
+| [Autonomous AI Worker Orchestration with Git Worktree Isolation](entries/patterns/ai_worker_orchestration_worktree_isolation.md) | pattern | ai-agents, worker-orchestration, git-worktree, process-isolation, task-management, lease-based-recovery | software-engineering | medium | You want to build a control-plane daemon that autonomously dispatches AI codi... |
 | [Building a Self-Service Research Portal](entries/patterns/self_service_web_portal.md) | pattern | web-portal, full-stack, dashboard, self-service, monitoring, flask, react, api | software-engineering | medium | Research testbeds and lab infrastructure need a web-based portal where team m... |
+| [Iterative Multi-Agent Generation with Visual Feedback Loop](entries/patterns/iterative_visual_generation_pipeline.md) | pattern | multi-agent, visualizer-critic, iterative-generation, svg, feedback-loop, vlm, pipeline | software-engineering | medium | When using LLMs to generate visual artifacts (SVG figures, diagrams, layouts)... |
+| [Multi-Agent Burst Analysis for Pre-Implementation Planning](entries/patterns/multi_agent_burst_analysis.md) | pattern | multi-agent, burst-analysis, parallel-agents, pre-implementation, orchestration, approval-gate | software-engineering | medium | You have an AI-assisted development pipeline where agents implement tasks aut... |
+| [Reviewer Gate and Escalation Pattern for AI Agent Quality Control](entries/patterns/reviewer_gate_escalation.md) | pattern | ai-agents, quality-gate, code-review, escalation, orchestration, human-in-the-loop | software-engineering | medium | When AI agents autonomously generate code in an orchestrated pipeline, there ... |
+| [Security Hardening Patterns for AI-Agent-Driven Systems](entries/patterns/security_hardening_ai_agent_systems.md) | pattern | security, hardening, ai-agents, path-traversal, sandbox, isolation, xss, sql-injection, concurrency | software-engineering | medium | You have a system where AI agents (Codex, OpenCode, or similar) execute code ... |
