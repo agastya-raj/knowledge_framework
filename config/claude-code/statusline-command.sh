@@ -1,7 +1,6 @@
 #!/bin/sh
 # Claude Code status line
-# Line 1: icon user@host  branch  [model]  Week [bar]
-# Line 2: Ctxt [bar]
+# ✦ user@host  branch  [model]  Week [bar]  Ctxt [bar]
 
 input=$(cat)
 
@@ -92,8 +91,7 @@ else
     ctx_line="${DIM}Ctxt${RESET} ${c_bar}"
 fi
 
-# ── Output ───────────────────────────────────────────────────────────────────
-# Line 1: icon user@host  branch  [model]  Week [bar]
-printf "\342\234\273 %b%b%b%b\n" "$user_host" "$branch_str" "$model_badge" "$weekly_str"
-# Line 2: Ctxt [bar]
-printf "%b" "$ctx_line"
+# ── Output (single line) ─────────────────────────────────────────────────────
+# icon user@host  branch  [model]  Week [bar]  Ctxt [bar]
+printf "${MAGENTA}${BOLD}\342\234\246${RESET} %b%b%b%b  %b" \
+    "$user_host" "$branch_str" "$model_badge" "$weekly_str" "$ctx_line"
