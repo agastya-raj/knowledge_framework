@@ -1,0 +1,32 @@
+{
+  "permissions": {
+    "defaultMode": "default"
+  },
+  "statusLine": {
+    "type": "command",
+    "command": "sh {{HOME}}/.claude/statusline-command.sh"
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash {{HOME}}/ad_hoc/knowledge_framework/scripts/sync_config.sh"
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash {{HOME}}/.claude/scripts/knowledge_capture_hook.sh"
+          }
+        ]
+      }
+    ]
+  }
+}

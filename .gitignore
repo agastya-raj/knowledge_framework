@@ -7,3 +7,7 @@ _audit_queue/*.md
 
 # Audit logs
 scripts/*.log
+
+# Bootstrap should never commit these (they live in ~/.claude/)
+# settings.local.json — machine-specific, never synced
+# .settings_template_hash — generated at bootstrap time
