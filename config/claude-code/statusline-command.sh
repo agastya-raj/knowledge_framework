@@ -1,6 +1,6 @@
 #!/bin/sh
 # Claude Code status line
-# ✦ user@host  branch  [model]  Week [bar]  Ctxt [bar]
+# ✦ user@host  branch  [model]  Ctxt [bar]
 
 input=$(cat)
 
@@ -8,8 +8,6 @@ input=$(cat)
 cwd=$(echo "$input" | jq -r '.workspace.current_dir // .cwd // ""')
 model_name=$(echo "$input" | jq -r '.model.display_name // ""')
 used_pct=$(echo "$input" | jq -r '.context_window.used_percentage // empty')
-weekly_used=$(echo "$input" | jq -r '.usage.weekly.used // empty')
-weekly_limit=$(echo "$input" | jq -r '.usage.weekly.limit // empty')
 
 # ── ANSI ─────────────────────────────────────────────────────────────────────
 RED='\033[0;31m'
@@ -67,31 +65,19 @@ if [ -n "$model_name" ]; then
     model_badge=" ${MAGENTA}${BOLD}[${model_name}]${RESET}"
 fi
 
-# ── Weekly usage bar ─────────────────────────────────────────────────────────
-if [ -n "$weekly_used" ] && [ -n "$weekly_limit" ] && [ "$weekly_limit" -gt 0 ] 2>/dev/null; then
-    w_pct=$(echo "$weekly_used $weekly_limit" | awk '{printf "%.1f", ($1/$2)*100}')
-    w_filled=$(echo "$w_pct $BAR_WIDTH" | awk '{n=int($1/100*$2+0.5); if(n>$2)n=$2; print n}')
-    w_color=$(pct_color "$w_pct")
-    w_bar=$(make_bar "$w_filled" "$BAR_WIDTH" "█" "░" "$w_color")
-    weekly_str=" ${DIM}Week${RESET} ${w_bar} ${DIM}$(printf "%.0f" "$w_pct")%${RESET}"
-else
-    w_bar=$(make_bar 0 "$BAR_WIDTH" "█" "░" "$DIM")
-    weekly_str=" ${DIM}Week${RESET} ${w_bar}"
-fi
-
 # ── Context window bar ──────────────────────────────────────────────────────
 if [ -n "$used_pct" ]; then
     c_color=$(pct_color "$used_pct")
     c_filled=$(echo "$used_pct $BAR_WIDTH" | awk '{n=int($1/100*$2+0.5); if(n>$2)n=$2; print n}')
     c_bar=$(make_bar "$c_filled" "$BAR_WIDTH" "█" "░" "$c_color")
     c_int=$(printf "%.0f" "$used_pct")
-    ctx_line="${DIM}Ctxt${RESET} ${c_bar} ${DIM}${c_int}%${RESET}"
+    ctx_str=" ${DIM}Ctxt${RESET} ${c_bar} ${DIM}${c_int}%${RESET}"
 else
     c_bar=$(make_bar 0 "$BAR_WIDTH" "█" "░" "$DIM")
-    ctx_line="${DIM}Ctxt${RESET} ${c_bar}"
+    ctx_str=" ${DIM}Ctxt${RESET} ${c_bar}"
 fi
 
 # ── Output (single line) ─────────────────────────────────────────────────────
-# icon user@host  branch  [model]  Week [bar]  Ctxt [bar]
-printf "${MAGENTA}${BOLD}\342\234\246${RESET} %b%b%b%b  %b" \
-    "$user_host" "$branch_str" "$model_badge" "$weekly_str" "$ctx_line"
+# ✦ user@host  branch  [model]  Ctxt [bar]
+printf "${MAGENTA}${BOLD}\342\234\246${RESET} %b%b%b%b" \
+    "$user_host" "$branch_str" "$model_badge" "$ctx_str"
