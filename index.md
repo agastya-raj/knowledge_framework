@@ -1,12 +1,13 @@
 # Knowledge Framework Index
 
-_Auto-generated on 2026-02-24. Do not edit manually._
+_Auto-generated on 2026-02-26. Do not edit manually._
 
-**12 entries**
+**13 entries**
 
 | Entry | Type | Tags | Domain | Confidence | Summary |
 |-------|------|------|--------|------------|---------|
 | [EDFA Gain Spectrum Modeling with ML](entries/domain/edfa_gain_modeling.md) | domain | edfa, gain-spectrum, noise-figure, ml, transfer-learning, optical-amplifier, jocn | optical-networking | high | EDFAs (Erbium-Doped Fiber Amplifiers) are the backbone of long-haul optical n... |
+| [Multi-Device Failure Injection Experiment with Concurrent Telemetry to Kafka](entries/integrations/failure_injection_experiment_kafka_telemetry.md) | integration | kafka, telemetry, failure-injection, experiment-orchestration, optical-networking, netconf, concurrent-polling | optical-networking | low | You need to run a multi-hour experiment on a live optical network testbed whe... |
 | [Digital Twin Architecture for Optical Networks](entries/patterns/digital_twin_optical_network.md) | pattern | digital-twin, optical-network, dlm, digital-link-model, ila, monitoring, testbed | optical-networking | high | Operating optical networks requires continuous monitoring and prediction of s... |
 | [CI/CD Pipeline for LaTeX Thesis with AI-Powered Academic Review](entries/patterns/latex_thesis_cicd_ai_review.md) | pattern | latex, thesis, ci-cd, github-actions, overleaf, ai-review, academic-writing, claude-code-action | research-methods | medium | PhD thesis writing in LaTeX suffers from two quality gaps that slow down the ... |
 | [Multi-Agent Research Pipeline for Large Dataset Analysis](entries/patterns/multi_agent_research_pipeline.md) | pattern | multi-agent, swarm, research, large-dataset, iterative-analysis, exploration-exploitation | research-methods | medium | You have a large dataset (hundreds of GBs) that needs exploratory analysis — ... |

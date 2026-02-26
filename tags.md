@@ -1,8 +1,8 @@
 # Knowledge Framework Tags
 
-_Auto-generated on 2026-02-24. Do not edit manually._
+_Auto-generated on 2026-02-26. Do not edit manually._
 
-**74 tags across 12 entries**
+**81 tags across 13 entries**
 
 ## academic-writing
 
@@ -59,6 +59,10 @@ _Auto-generated on 2026-02-24. Do not edit manually._
 
 - [Security Hardening Patterns for AI-Agent-Driven Systems](entries/patterns/security_hardening_ai_agent_systems.md) (pattern, software-engineering)
 
+## concurrent-polling
+
+- [Multi-Device Failure Injection Experiment with Concurrent Telemetry to Kafka](entries/integrations/failure_injection_experiment_kafka_telemetry.md) (integration, optical-networking)
+
 ## cross-tool
 
 - [Agent-Agnostic Knowledge Management for AI-Assisted Development](entries/patterns/agent_agnostic_knowledge_management.md) (pattern, software-engineering)
@@ -87,9 +91,17 @@ _Auto-generated on 2026-02-24. Do not edit manually._
 
 - [Reviewer Gate and Escalation Pattern for AI Agent Quality Control](entries/patterns/reviewer_gate_escalation.md) (pattern, software-engineering)
 
+## experiment-orchestration
+
+- [Multi-Device Failure Injection Experiment with Concurrent Telemetry to Kafka](entries/integrations/failure_injection_experiment_kafka_telemetry.md) (integration, optical-networking)
+
 ## exploration-exploitation
 
 - [Multi-Agent Research Pipeline for Large Dataset Analysis](entries/patterns/multi_agent_research_pipeline.md) (pattern, research-methods)
+
+## failure-injection
+
+- [Multi-Device Failure Injection Experiment with Concurrent Telemetry to Kafka](entries/integrations/failure_injection_experiment_kafka_telemetry.md) (integration, optical-networking)
 
 ## feedback-loop
 
@@ -143,6 +155,10 @@ _Auto-generated on 2026-02-24. Do not edit manually._
 
 - [EDFA Gain Spectrum Modeling with ML](entries/domain/edfa_gain_modeling.md) (domain, optical-networking)
 
+## kafka
+
+- [Multi-Device Failure Injection Experiment with Concurrent Telemetry to Kafka](entries/integrations/failure_injection_experiment_kafka_telemetry.md) (integration, optical-networking)
+
 ## knowledge-base
 
 - [Agent-Agnostic Knowledge Management for AI-Assisted Development](entries/patterns/agent_agnostic_knowledge_management.md) (pattern, software-engineering)
@@ -179,6 +195,10 @@ _Auto-generated on 2026-02-24. Do not edit manually._
 - [Multi-Agent Burst Analysis for Pre-Implementation Planning](entries/patterns/multi_agent_burst_analysis.md) (pattern, software-engineering)
 - [Multi-Agent Research Pipeline for Large Dataset Analysis](entries/patterns/multi_agent_research_pipeline.md) (pattern, research-methods)
 
+## netconf
+
+- [Multi-Device Failure Injection Experiment with Concurrent Telemetry to Kafka](entries/integrations/failure_injection_experiment_kafka_telemetry.md) (integration, optical-networking)
+
 ## noise-figure
 
 - [EDFA Gain Spectrum Modeling with ML](entries/domain/edfa_gain_modeling.md) (domain, optical-networking)
@@ -194,6 +214,10 @@ _Auto-generated on 2026-02-24. Do not edit manually._
 ## optical-network
 
 - [Digital Twin Architecture for Optical Networks](entries/patterns/digital_twin_optical_network.md) (pattern, optical-networking)
+
+## optical-networking
+
+- [Multi-Device Failure Injection Experiment with Concurrent Telemetry to Kafka](entries/integrations/failure_injection_experiment_kafka_telemetry.md) (integration, optical-networking)
 
 ## orchestration
 
@@ -271,6 +295,10 @@ _Auto-generated on 2026-02-24. Do not edit manually._
 ## task-management
 
 - [Autonomous AI Worker Orchestration with Git Worktree Isolation](entries/patterns/ai_worker_orchestration_worktree_isolation.md) (pattern, software-engineering)
+
+## telemetry
+
+- [Multi-Device Failure Injection Experiment with Concurrent Telemetry to Kafka](entries/integrations/failure_injection_experiment_kafka_telemetry.md) (integration, optical-networking)
 
 ## testbed
 
