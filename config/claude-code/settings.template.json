@@ -7,6 +7,12 @@
     "command": "sh {{HOME}}/.claude/statusline-command.sh"
   },
   "skipDangerousModePermissionPrompt": true,
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "enabledPlugins": {
+    "ralph-loop@claude-plugins-official": true
+  },
   "hooks": {
     "SessionStart": [
       {
@@ -14,6 +20,25 @@
           {
             "type": "command",
             "command": "bash {{HOME}}/ad_hoc/knowledge_framework/scripts/sync_config.sh"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash {{HOME}}/ad_hoc/evo_ai/scripts/hooks/session_start_hook.sh"
+          }
+        ]
+      }
+    ],
+    "PreCompact": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash {{HOME}}/ad_hoc/evo_ai/scripts/hooks/precompact_hook.sh",
+            "timeout": 30
           }
         ]
       }
@@ -24,6 +49,15 @@
           {
             "type": "command",
             "command": "bash {{HOME}}/.claude/scripts/knowledge_capture_hook.sh"
+          }
+        ]
+      },
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash {{HOME}}/ad_hoc/evo_ai/scripts/hooks/session_end_hook.sh",
+            "timeout": 10
           }
         ]
       }

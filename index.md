@@ -1,14 +1,18 @@
 # Knowledge Framework Index
 
-_Auto-generated on 2026-02-26. Do not edit manually._
+_Auto-generated on 2026-02-28. Do not edit manually._
 
-**13 entries**
+**17 entries**
 
 | Entry | Type | Tags | Domain | Confidence | Summary |
 |-------|------|------|--------|------------|---------|
+| [Optical Ring Power Debugging — Systematic Approach to Signal Tracing](entries/debugging/optical_ring_power_debugging.md) | debugging | optical, power, debugging, edfa, wss, polatis | optical-networking | high | When optical power levels are wrong after topology changes, the root cause ca... |
 | [EDFA Gain Spectrum Modeling with ML](entries/domain/edfa_gain_modeling.md) | domain | edfa, gain-spectrum, noise-figure, ml, transfer-learning, optical-amplifier, jocn | optical-networking | high | EDFAs (Erbium-Doped Fiber Amplifiers) are the backbone of long-haul optical n... |
+| [ILA Bidirectional Amplifier in Ring Topology — Bootstrap, Constraints, and Gain Tuning](entries/domain/ila_bidirectional_amplifier_ring_topology.md) | domain | ila, edfa, optical-amplifier, ring-topology, power-optimization | optical-networking | high | Inserting an In-Line Amplifier (ILA) into an optical ring creates a bootstrap... |
 | [Multi-Device Failure Injection Experiment with Concurrent Telemetry to Kafka](entries/integrations/failure_injection_experiment_kafka_telemetry.md) | integration | kafka, telemetry, failure-injection, experiment-orchestration, optical-networking, netconf, concurrent-polling | optical-networking | low | You need to run a multi-hour experiment on a live optical network testbed whe... |
 | [Digital Twin Architecture for Optical Networks](entries/patterns/digital_twin_optical_network.md) | pattern | digital-twin, optical-network, dlm, digital-link-model, ila, monitoring, testbed | optical-networking | high | Operating optical networks requires continuous monitoring and prediction of s... |
+| [OpenROADM NETCONF Driver Evolution — From Raw XML to Agent-Friendly API](entries/patterns/openroadm_netconf_driver_evolution.md) | pattern | netconf, yang, openroadm, optical, sdk, driver-design | optical-networking | high | Optical network devices (ILAs, ROADMs, transceivers) expose NETCONF/YANG inte... |
+| [Topology Navigator — Agent-Friendly Path Planning for Optical Cross-Connects](entries/patterns/topology_navigator_agent_friendly_path_planning.md) | pattern | topology, optical, polatis, path-planning, agent-tooling | optical-networking | high | Agents working with optical switches (Polatis) waste significant time on port... |
 | [CI/CD Pipeline for LaTeX Thesis with AI-Powered Academic Review](entries/patterns/latex_thesis_cicd_ai_review.md) | pattern | latex, thesis, ci-cd, github-actions, overleaf, ai-review, academic-writing, claude-code-action | research-methods | medium | PhD thesis writing in LaTeX suffers from two quality gaps that slow down the ... |
 | [Multi-Agent Research Pipeline for Large Dataset Analysis](entries/patterns/multi_agent_research_pipeline.md) | pattern | multi-agent, swarm, research, large-dataset, iterative-analysis, exploration-exploitation | research-methods | medium | You have a large dataset (hundreds of GBs) that needs exploratory analysis — ... |
 | [OpenCode SDK Integration and Multi-Backend AI Agent Abstraction](entries/integrations/opencode_sdk_backend_abstraction.md) | integration | opencode-sdk, codex-sdk, backend-abstraction, sdk-migration, ai-agents, structured-output | software-engineering | medium | You need to integrate an AI agent backend into a multi-service application --... |
