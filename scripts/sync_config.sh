@@ -32,14 +32,19 @@ if ! mkdir "$LOCK_DIR" 2>/dev/null; then
 fi
 trap cleanup EXIT
 
-# --- Git pull (10s timeout, fail silently) ---
+# --- Git sync (pull --rebase + push, 10s timeout each, fail silently) ---
 if [ -d "$REPO_DIR/.git" ]; then
-    if command -v timeout &>/dev/null; then
-        timeout 10 git -C "$REPO_DIR" pull --ff-only --quiet 2>/dev/null || true
-    else
-        # macOS: use perl alarm as timeout fallback
-        perl -e 'alarm 10; exec @ARGV' git -C "$REPO_DIR" pull --ff-only --quiet 2>/dev/null || true
-    fi
+    _git_timed() {
+        if command -v timeout &>/dev/null; then
+            timeout 10 git -C "$REPO_DIR" "$@" 2>/dev/null || true
+        else
+            perl -e 'alarm 10; exec @ARGV' git -C "$REPO_DIR" "$@" 2>/dev/null || true
+        fi
+    }
+    # Pull with rebase so local commits (captures, curations) replay on top of remote
+    _git_timed pull --rebase --quiet
+    # Push local commits so other servers pick them up
+    _git_timed push --quiet
 fi
 
 # --- Regenerate settings.json if template changed ---
