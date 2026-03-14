@@ -1,0 +1,14 @@
+{
+  "codex": {
+    "type": "stdio",
+    "command": "codex",
+    "args": [
+      "mcp-server",
+      "-c",
+      "model=\"gpt-5.4\"",
+      "-c",
+      "reasoning.effort=\"high\""
+    ],
+    "env": {}
+  }
+}

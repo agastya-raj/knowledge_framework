@@ -109,5 +109,53 @@ if [ "$(uname -s)" = "Darwin" ] && [ -d "$CONFIG_DIR/skills" ]; then
     done
 fi
 
+# --- Merge MCP servers into ~/.claude.json ---
+MCP_TEMPLATE="$CONFIG_DIR/mcp-servers.json"
+CLAUDE_JSON="$HOME/.claude.json"
+MCP_HASH_FILE="$CLAUDE_DIR/.mcp_servers_hash"
+
+if [ -f "$MCP_TEMPLATE" ]; then
+    current_mcp_hash=$(shasum -a 256 "$MCP_TEMPLATE" 2>/dev/null | cut -d' ' -f1)
+    previous_mcp_hash=""
+    [ -f "$MCP_HASH_FILE" ] && previous_mcp_hash=$(cat "$MCP_HASH_FILE" 2>/dev/null)
+
+    if [ "$current_mcp_hash" != "$previous_mcp_hash" ]; then
+        if [ -f "$CLAUDE_JSON" ]; then
+            # Merge: overlay mcpServers from template into existing .claude.json
+            # Preserves all other keys (projects, tips, telemetry, etc.)
+            python3 -c "
+import json, sys
+try:
+    with open('$CLAUDE_JSON') as f:
+        local = json.load(f)
+    with open('$MCP_TEMPLATE') as f:
+        servers = json.load(f)
+    if 'mcpServers' not in local:
+        local['mcpServers'] = {}
+    local['mcpServers'].update(servers)
+    with open('$CLAUDE_JSON', 'w') as f:
+        json.dump(local, f, indent=4)
+except Exception as e:
+    print(f'[sync] mcp merge failed: {e}', file=sys.stderr)
+    sys.exit(1)
+" && {
+                echo "$current_mcp_hash" > "$MCP_HASH_FILE"
+                log "merged MCP servers into .claude.json"
+            }
+        else
+            # No .claude.json yet — create minimal one
+            python3 -c "
+import json
+with open('$MCP_TEMPLATE') as f:
+    servers = json.load(f)
+with open('$CLAUDE_JSON', 'w') as f:
+    json.dump({'mcpServers': servers}, f, indent=4)
+"
+            echo "$current_mcp_hash" > "$MCP_HASH_FILE"
+            log "created .claude.json with MCP servers"
+        fi
+    fi
+fi
+
 log "done"
 exit 0
