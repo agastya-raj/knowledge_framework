@@ -36,15 +36,27 @@ trap cleanup EXIT
 if [ -d "$REPO_DIR/.git" ]; then
     _git_timed() {
         if command -v timeout &>/dev/null; then
-            timeout 10 git -C "$REPO_DIR" "$@" 2>/dev/null || true
+            timeout 10 git -C "$REPO_DIR" "$@" 2>/dev/null
         else
-            perl -e 'alarm 10; exec @ARGV' git -C "$REPO_DIR" "$@" 2>/dev/null || true
+            perl -e 'alarm 10; exec @ARGV' git -C "$REPO_DIR" "$@" 2>/dev/null
         fi
     }
+
+    # Abort any leftover rebase from a previous failed sync
+    if [ -d "$REPO_DIR/.git/rebase-merge" ] || [ -d "$REPO_DIR/.git/rebase-apply" ]; then
+        git -C "$REPO_DIR" rebase --abort 2>/dev/null || true
+        log "aborted stale rebase"
+    fi
+
     # Pull with rebase so local commits (captures, curations) replay on top of remote
-    _git_timed pull --rebase --quiet
-    # Push local commits so other servers pick them up
-    _git_timed push --quiet
+    if _git_timed pull --rebase --quiet; then
+        # Push local commits so other servers pick them up
+        _git_timed push --quiet || log "push failed (offline?)"
+    else
+        # Rebase conflict — abort to leave repo in a clean state
+        git -C "$REPO_DIR" rebase --abort 2>/dev/null || true
+        log "rebase conflict — aborted, repo unchanged. resolve manually."
+    fi
 fi
 
 # --- Regenerate settings.json if template changed ---
