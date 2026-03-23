@@ -17,7 +17,6 @@ Shared knowledge base at `~/ad_hoc/knowledge_framework` (GitHub: knowledge_frame
 ## Multi-Agent Tools
 - **Web search (Brave)**: Use `/web-search` for general search, `/news-search` for news, `/images-search` for images, `/llm-context` for RAG-grounded content. These are Brave Search API skills — fast (~0.5s), structured results. Prefer over built-in WebSearch/WebFetch.
 - **Browser (Browserbase)**: `/search` (Browserbase search), `/browser` (full browser automation), `/fetch` (page content without JS). These are separate Browserbase skills — use when you need to visit/interact with pages, not for simple search.
-- **Gemini search**: `/gemini-search` — fallback only, slow (~25s). Use if Brave is unavailable.
 - **Code review**: Use `/dual-review` for parallel Claude + Codex review, or call `codex` directly.
 - **Claude** remains the primary agent for planning, architecture, and direct code edits.
 
