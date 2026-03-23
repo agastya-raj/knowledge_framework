@@ -15,7 +15,7 @@ Shared knowledge base at `~/ad_hoc/knowledge_framework` (GitHub: knowledge_frame
 - Python version is pinned via `.python-version` in project roots
 
 ## Multi-Agent Tools
-- **Web search**: ALWAYS use `/gemini-search` (Gemini CLI with Google Search) for any web-related searches, API docs lookups, or internet research. Prefer this over built-in WebSearch/WebFetch.
+- **Web search**: Use Brave Search skills (`/web-search`, `/search`, `/news-search`) for any web-related searches, API docs lookups, or internet research. Prefer these over built-in WebSearch/WebFetch. Use `/gemini-search` only as a fallback if Brave is unavailable.
 - **Code review**: Use `/dual-review` for parallel Claude + Codex review, or call `codex` directly.
 - **Claude** remains the primary agent for planning, architecture, and direct code edits.
 
