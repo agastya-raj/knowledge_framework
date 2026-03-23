@@ -16,5 +16,12 @@ Shared knowledge base at `~/ad_hoc/knowledge_framework` (GitHub: knowledge_frame
 
 ## Multi-Agent Tools
 - **Web search**: ALWAYS use `/gemini-search` (Gemini CLI with Google Search) for any web-related searches, API docs lookups, or internet research. Prefer this over built-in WebSearch/WebFetch.
-- **Code review / second opinion**: Use the `codex` MCP server (GPT 5.4, high reasoning). Start with `codex` tool, capture `threadId`, use `codex-reply` for follow-ups.
-- Claude remains the primary agent for planning, architecture, and direct code edits.
+- **Code review**: Use `/dual-review` for parallel Claude + Codex review, or call `codex` directly.
+- **Claude** remains the primary agent for planning, architecture, and direct code edits.
+
+### Codex MCP Usage Defaults
+Always capture `threadId` from the initial `codex` response and use `codex-reply` for follow-ups.
+
+- **Reviews**: `sandbox: "read-only"`, `approval-policy: "never"`, always pass `cwd`
+- **Second-opinion generation**: `sandbox: "workspace-write"`, `approval-policy: "on-request"`, always pass `cwd`, and **always use a worktree** (`isolation: "worktree"` on the Agent, or pass a worktree path as `cwd`) so Codex writes to an isolated copy — never the user's working tree
+- **base-instructions**: "Be critical. Focus on correctness, security, and edge cases over style."
